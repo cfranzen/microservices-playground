@@ -9,7 +9,7 @@ services:
     volumes:
       - postgres:/data/postgres
     ports:
-      - "5051:5432"
+      - "127.0.0.1:5051:5432"
     networks:
       - postgres
     restart: unless-stopped
@@ -23,17 +23,15 @@ services:
     volumes:
       - pgadmin:/var/lib/pgadmin
     ports:
-      - "5050:80"
+      - "127.0.0.1:5050:80"
     networks:
       - postgres
     restart: unless-stopped
-  #  zipkin:
-  #    image: openzipkin/zipkin
-  #    container_name: zipkin
-  #    ports:
-  #      - "9411:9411"
-  #    networks:
-  #      - spring
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "127.0.0.1:9411:9411"
   #  rabbitmq:
   #    image: rabbitmq:3.9.11-management-alpine
   #    container_name: rabbitmq
