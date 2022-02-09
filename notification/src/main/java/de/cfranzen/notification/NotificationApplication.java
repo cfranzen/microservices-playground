@@ -4,7 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
-@SpringBootApplication
+@SpringBootApplication(
+        scanBasePackages = {
+                "de.cfranzen.notification",
+                "de.cfranzen.amqp"
+        }
+)
 @EnableEurekaClient
 public class NotificationApplication {
 

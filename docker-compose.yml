@@ -32,14 +32,12 @@ services:
     container_name: zipkin
     ports:
       - "127.0.0.1:9411:9411"
-  #  rabbitmq:
-  #    image: rabbitmq:3.9.11-management-alpine
-  #    container_name: rabbitmq
-  #    ports:
-  #      - "5672:5672"
-  #      - "15672:15672"
-  #    networks:
-  #      - spring
+  rabbitmq:
+    image: rabbitmq:3.9.13-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
   #  eureka-server:
   #    image: amigoscode/eureka-server:latest
   #    container_name: eureka-server

@@ -1,8 +1,8 @@
 package de.cfranzen.customer;
 
+import de.cfranzen.amqp.RabbitMqMessageProducer;
 import de.cfranzen.clients.fraud.FraudCheckResponse;
 import de.cfranzen.clients.fraud.FraudClient;
-import de.cfranzen.clients.notification.NotificationClient;
 import de.cfranzen.clients.notification.NotificationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ class CustomerService {
 
     private final FraudClient fraudClient;
 
-    private final NotificationClient notificationClient;
+    private final RabbitMqMessageProducer messageProducer;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder().firstName(request.firstName()).lastName(request.lastName()).email(request.email()).build();
@@ -26,14 +26,12 @@ class CustomerService {
             throw new IllegalStateException("fraudster");
         }
 
-        // todo: make it async. i.e add to queue
-        notificationClient.sendNotification(
-                new NotificationRequest(
-                        customer.getId(),
-                        customer.getEmail(),
-                        String.format("Hi %s, welcome to microservices-playground...",
-                                customer.getFirstName())
-                )
+        NotificationRequest payload = new NotificationRequest(
+                customer.getId(),
+                customer.getEmail(),
+                String.format("Hi %s, welcome to microservices-playground...",
+                        customer.getFirstName())
         );
+        messageProducer.publish(payload, "internal.exchange", "internal.notification.routing-key");
     }
 }

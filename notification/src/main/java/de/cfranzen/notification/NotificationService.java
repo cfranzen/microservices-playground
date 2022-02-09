@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-class NotificationService {
+public class NotificationService {
 
     private final NotificationRepository repository;
 
