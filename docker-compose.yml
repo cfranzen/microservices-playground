@@ -46,30 +46,30 @@ services:
     networks:
       - app
 
-  eureka-server:
-    image: ghcr.io/cfranzen/microservices-playground/eureka-server:latest
-    container_name: eureka-server
-    ports:
-      - "127.0.0.1:8761:8761"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - app
-    depends_on:
-      - zipkin
-
-  apigw:
-    image: ghcr.io/cfranzen/microservices-playground/apigw:latest
-    container_name: apigw
-    ports:
-      - "127.0.0.1:8083:8083"
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    networks:
-      - app
-    depends_on:
-      - zipkin
-      - eureka-server
+  #  eureka-server:
+  #    image: ghcr.io/cfranzen/microservices-playground/eureka-server:latest
+  #    container_name: eureka-server
+  #    ports:
+  #      - "127.0.0.1:8761:8761"
+  #    environment:
+  #      - SPRING_PROFILES_ACTIVE=docker
+  #    networks:
+  #      - app
+  #    depends_on:
+  #      - zipkin
+  #
+  #  apigw:
+  #    image: ghcr.io/cfranzen/microservices-playground/apigw:latest
+  #    container_name: apigw
+  #    ports:
+  #      - "127.0.0.1:8083:8083"
+  #    environment:
+  #      - SPRING_PROFILES_ACTIVE=docker
+  #    networks:
+  #      - app
+  #    depends_on:
+  #      - zipkin
+  #      - eureka-server
 
   customer:
     image: ghcr.io/cfranzen/microservices-playground/customer:latest
