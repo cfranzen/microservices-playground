@@ -1,51 +1,4 @@
 services:
-  postgres:
-    container_name: postgres
-    image: postgres
-    environment:
-      POSTGRES_USER: microservices
-      POSTGRES_PASSWORD: microservices
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
-    ports:
-      - "127.0.0.1:5051:5432"
-    networks:
-      - app
-    restart: unless-stopped
-
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "pgadmin4@pgadmin.org"
-      PGADMIN_DEFAULT_PASSWORD: "admin"
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-    ports:
-      - "127.0.0.1:5050:80"
-    networks:
-      - app
-    restart: unless-stopped
-
-  zipkin:
-    image: openzipkin/zipkin
-    container_name: zipkin
-    ports:
-      - "127.0.0.1:9411:9411"
-    networks:
-      - app
-
-  rabbitmq:
-    image: rabbitmq:3.9.13-management-alpine
-    container_name: rabbitmq
-    ports:
-      - "127.0.0.1:5672:5672"
-      - "127.0.0.1:15672:15672"
-    networks:
-      - app
-
   #  eureka-server:
   #    image: ghcr.io/cfranzen/microservices-playground/eureka-server:latest
   #    container_name: eureka-server
@@ -80,10 +33,6 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - app
-    depends_on:
-      - zipkin
-      - postgres
-      - rabbitmq
 
   fraud:
     image: ghcr.io/cfranzen/microservices-playground/fraud:latest
@@ -94,10 +43,6 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - app
-    depends_on:
-      - zipkin
-      - postgres
-      - rabbitmq
 
   notification:
     image: ghcr.io/cfranzen/microservices-playground/notification:latest
@@ -108,10 +53,6 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - app
-    depends_on:
-      - zipkin
-      - postgres
-      - rabbitmq
 
 networks:
   app:
