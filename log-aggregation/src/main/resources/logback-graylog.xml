@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <springProperty scope="context" name="HOSTNAME" source="logging.graylog.host" defaultValue="localhost"/>
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
+
+    <appender name="GELF" class="de.siegmar.logbackgelf.GelfTcpAppender">
+        <graylogHost>${HOSTNAME}</graylogHost>
+        <graylogPort>12201</graylogPort>
+        <encoder class="de.siegmar.logbackgelf.GelfEncoder">
+            <includeRootCauseData>true</includeRootCauseData>
+            <includeLevelName>true</includeLevelName>
+            <staticField>app_name:${APP_NAME}</staticField>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="GELF"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

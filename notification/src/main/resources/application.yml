@@ -45,3 +45,6 @@ rabbitmq:
     notification: notification.queue
   routing-keys:
     internal-notification: internal.notification.routing-key
+
+logging:
+  config: classpath:logback-graylog.xml

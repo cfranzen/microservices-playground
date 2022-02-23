@@ -10,3 +10,6 @@ eureka:
   client:
     fetch-registry: false
     register-with:eureka: false
+    
+logging:
+  config: classpath:logback-graylog.xml

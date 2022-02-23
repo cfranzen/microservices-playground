@@ -73,5 +73,10 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>de.cfranzen</groupId>
+            <artifactId>log-aggregation</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

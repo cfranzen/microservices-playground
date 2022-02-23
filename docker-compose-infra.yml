@@ -78,6 +78,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: microservices
       MONGO_INITDB_ROOT_PASSWORD: microservices
     volumes:
+      - mongo-data:/data/db
       - ./docker/mongodb-init.js:/docker-entrypoint-initdb.d/mongodb-init.js:ro
     ports:
       - "27017:27017"
@@ -238,6 +239,7 @@ services:
       - app
     depends_on:
       - zipkin
+      - graylog
 
   apigw:
     image: ghcr.io/cfranzen/microservices-playground/apigw:latest
@@ -251,6 +253,7 @@ services:
     depends_on:
       - zipkin
       - eureka-server
+      - graylog
 
 networks:
   app:
@@ -265,3 +268,4 @@ volumes:
   elasticsearch-data:
   graylog-data:
   graylog-journal:
+  mongo-data:

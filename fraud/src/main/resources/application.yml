@@ -26,7 +26,7 @@ eureka:
   instance:
     metadataMap:
       metrics.path: "/actuator/prometheus"
-      
+
 management:
   endpoints:
     web:
@@ -34,3 +34,6 @@ management:
         include: '*'
     health:
       show-details: 'always'
+      
+logging:
+  config: classpath:logback-graylog.xml

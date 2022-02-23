@@ -29,3 +29,6 @@ management:
         include: '*'
     health:
       show-details: 'always'
+
+logging:
+  config: classpath:logback-graylog.xml

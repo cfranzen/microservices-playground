@@ -77,7 +77,11 @@
             <groupId>de.cfranzen</groupId>
             <artifactId>clients</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.cfranzen</groupId>
+            <artifactId>log-aggregation</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
