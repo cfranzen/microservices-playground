@@ -204,6 +204,8 @@ services:
     networks:
       - app
     restart: always
+    depends_on:
+      - eureka-server
 
   blackbox-exporter:
     image: prom/blackbox-exporter
@@ -224,6 +226,31 @@ services:
       - ./docker/grafana-datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
     networks:
       - app
+
+  eureka-server:
+    image: ghcr.io/cfranzen/microservices-playground/eureka-server:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - app
+    depends_on:
+      - zipkin
+
+  apigw:
+    image: ghcr.io/cfranzen/microservices-playground/apigw:latest
+    container_name: apigw
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - app
+    depends_on:
+      - zipkin
+      - eureka-server
 
 networks:
   app:
