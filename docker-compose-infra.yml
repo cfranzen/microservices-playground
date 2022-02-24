@@ -215,6 +215,8 @@ services:
       - 9115:9115
     networks:
       - app
+    depends_on:
+      - prometheus
 
   grafana:
     image: grafana/grafana
