@@ -29,6 +29,19 @@ services:
     networks:
       - app
 
+  apigw:
+    image: ghcr.io/cfranzen/microservices-playground/apigw:latest
+    container_name: apigw
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - app
+    depends_on:
+      - customer
+      - fraud
+
 networks:
   app:
     driver: bridge
