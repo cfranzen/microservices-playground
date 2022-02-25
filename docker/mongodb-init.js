@@ -8,3 +8,14 @@ graylog.createUser(
     ]
   }
 );
+
+notification = db.getSiblingDB('notification');
+notification.createUser(
+  {
+    user: "notification",
+    pwd: "notification",
+    roles: [
+      { role: "dbOwner", db: "notification" }
+    ]
+  }
+);
