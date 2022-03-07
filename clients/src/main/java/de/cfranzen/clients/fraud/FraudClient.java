@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface FraudClient {
 
     @GetMapping("api/v1/fraud/{customerId}")
-    FraudCheckResponse isFraudster(@PathVariable("customerId") Integer customerId);
+    FraudCheckResult isFraudster(@PathVariable("customerId") Integer customerId);
 
     @PostMapping("api/v1/fraud/detectionModel")
     void updateModel(FraudUpdateDetectionModelRequest request);

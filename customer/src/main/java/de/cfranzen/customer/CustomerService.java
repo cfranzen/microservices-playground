@@ -1,7 +1,7 @@
 package de.cfranzen.customer;
 
 import de.cfranzen.amqp.RabbitMqMessageProducer;
-import de.cfranzen.clients.fraud.FraudCheckResponse;
+import de.cfranzen.clients.fraud.FraudCheckResult;
 import de.cfranzen.clients.fraud.FraudClient;
 import de.cfranzen.clients.notification.NotificationRequest;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ class CustomerService {
         Customer customer = Customer.builder().firstName(request.firstName()).lastName(request.lastName()).email(request.email()).build();
         repository.saveAndFlush(customer);
 
-        FraudCheckResponse response = fraudClient.isFraudster(customer.getId());
+        FraudCheckResult response = fraudClient.isFraudster(customer.getId());
         if (response.isFraudster()) {
             throw new IllegalStateException("fraudster");
         }

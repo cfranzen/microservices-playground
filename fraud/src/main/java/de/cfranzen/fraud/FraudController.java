@@ -1,6 +1,6 @@
 package de.cfranzen.fraud;
 
-import de.cfranzen.clients.fraud.FraudCheckResponse;
+import de.cfranzen.clients.fraud.FraudCheckResult;
 import de.cfranzen.clients.fraud.FraudUpdateDetectionModelRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,10 +22,10 @@ class FraudController {
     private final FraudDetectionService detectionService;
 
     @GetMapping("{customerId}")
-    public FraudCheckResponse isFraudster(@PathVariable("customerId") Integer customerId) {
+    public FraudCheckResult isFraudster(@PathVariable("customerId") Integer customerId) {
         boolean isFraudulent = checkService.isFraudulentCustomer(customerId);
         log.info("fraud check request for customer {}: {}", customerId, isFraudulent);
-        return new FraudCheckResponse(isFraudulent);
+        return new FraudCheckResult(customerId, isFraudulent);
     }
 
     @PostMapping("detectionModel")
