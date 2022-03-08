@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(
         name = "fraud",
-        url = "${clients.fraud.url}"
+        url = "${clients.fraud.url:}"
 )
 public interface FraudClient {
 
