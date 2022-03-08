@@ -18,6 +18,8 @@
         <module>apigw</module>
         <module>amqp</module>
         <module>log-aggregation</module>
+        <module>fraud-learning</module>
+        <module>kafka</module>
     </modules>
 
     <name>microservices</name>

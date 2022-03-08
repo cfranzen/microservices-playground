@@ -1,8 +1,6 @@
 spring:
   zipkin:
     base-url: http://zipkin:9411
-  datasource:
-    url: jdbc:postgresql://postgres:5432/fraud
   kafka:
-    producer:
+    consumer:
       bootstrap-servers: kafka:9092

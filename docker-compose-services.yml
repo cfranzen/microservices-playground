@@ -42,6 +42,16 @@ services:
       - customer
       - fraud
 
+  fraud-learning:
+    image: ghcr.io/cfranzen/microservices-playground/fraud-learning:latest
+    container_name: fraud-learning
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - app
+
 networks:
   app:
     driver: bridge
