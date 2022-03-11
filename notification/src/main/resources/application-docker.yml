@@ -1,17 +1,6 @@
 spring:
-  zipkin:
-    base-url: http://zipkin:9411
+  config:
+    import: configserver:http://config-server:8888
   data:
     mongodb:
       host: 'mongo'
-  rabbitmq:
-    addresses: rabbitmq:5672
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-server:8761/eureka
-
-logging:
-  graylog:
-    host: graylog

@@ -1,19 +1,7 @@
 spring:
-  zipkin:
-    base-url: http://zipkin:9411
+  config:
+    import: configserver:http://config-server:8888
   datasource:
     url: jdbc:postgresql://postgres:5432/fraud
   redis:
     host: redis
-  kafka:
-    producer:
-      bootstrap-servers: kafka:9092
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-server:8761/eureka
-
-logging:
-  graylog:
-    host: graylog

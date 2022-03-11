@@ -1,7 +1,0 @@
-spring:
-  zipkin:
-    base-url: http://zipkin:9411
-
-logging:
-  graylog:
-    host: graylog

@@ -245,8 +245,18 @@ services:
     networks:
       - app
     depends_on:
+      - config-server
       - zipkin
-      - graylog
+
+  config-server:
+    image: ghcr.io/cfranzen/microservices-playground/config-server:latest
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - app
+    depends_on:
+      - zipkin
 
 networks:
   app:
