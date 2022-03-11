@@ -9,6 +9,16 @@ services:
     networks:
       - app
 
+  #  customer2:
+  #    image: ghcr.io/cfranzen/microservices-playground/customer:latest
+  #    container_name: customer2
+  #    ports:
+  #      - "9080:8080"
+  #    environment:
+  #      - SPRING_PROFILES_ACTIVE=docker
+  #    networks:
+  #      - app
+
   fraud:
     image: ghcr.io/cfranzen/microservices-playground/fraud:latest
     container_name: fraud
