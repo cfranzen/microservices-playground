@@ -1,6 +1,8 @@
 package de.cfranzen.clients.fraud;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
+import org.springframework.cloud.sleuth.annotation.SpanTag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface FraudClient {
 
     @GetMapping("api/v1/fraud/{customerId}")
-    FraudCheckResult isFraudster(@PathVariable("customerId") Integer customerId);
+    @NewSpan
+    FraudCheckResult isFraudster(@PathVariable("customerId") @SpanTag("customerId") Integer customerId);
 
     @PostMapping("api/v1/fraud/detectionModel")
-    void updateModel(FraudUpdateDetectionModelRequest request);
+    @NewSpan
+    void updateModel(@SpanTag("request") FraudUpdateDetectionModelRequest request);
 }

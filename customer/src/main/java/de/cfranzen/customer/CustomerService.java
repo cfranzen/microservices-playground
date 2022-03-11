@@ -5,6 +5,8 @@ import de.cfranzen.clients.fraud.FraudCheckResult;
 import de.cfranzen.clients.fraud.FraudClient;
 import de.cfranzen.clients.notification.NotificationRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cloud.sleuth.annotation.NewSpan;
+import org.springframework.cloud.sleuth.annotation.SpanTag;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +19,8 @@ class CustomerService {
 
     private final RabbitMqMessageProducer messageProducer;
 
-    public void registerCustomer(CustomerRegistrationRequest request) {
+    @NewSpan
+    public void registerCustomer(@SpanTag("request") CustomerRegistrationRequest request) {
         Customer customer = Customer.builder().firstName(request.firstName()).lastName(request.lastName()).email(request.email()).build();
         repository.saveAndFlush(customer);
 
