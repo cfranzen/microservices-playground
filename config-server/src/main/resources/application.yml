@@ -8,5 +8,5 @@ spring:
     config:
       server:
         native:
-          searchLocations: classpath:/configs,classpath:/configs/{profile},classpath:/configs/{application}
+          searchLocations: classpath:/configs,classpath:/configs/{profile},classpath:/configs/{profile}/{application}
           addLabelLocations: false
