@@ -10,6 +10,8 @@ spring:
     addresses: rabbitmq:5672
 
 eureka:
+  instance:
+    hostname: ${spring.cloud.client.hostname}
   client:
     service-url:
       defaultZone: http://eureka-server:8761/eureka

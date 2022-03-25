@@ -10,6 +10,8 @@ spring:
     addresses: localhost:5672
 
 eureka:
+  instance:
+    hostname: localhost
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
