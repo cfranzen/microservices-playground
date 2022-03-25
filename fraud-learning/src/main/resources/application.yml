@@ -5,8 +5,8 @@ spring:
   application:
     name: fraud-learning
   config:
-    import: configserver:http://localhost:8888
-    
+    import: optional:configserver:http://localhost:8888,optional:configserver:http://config-server:8888
+
 eureka:
   instance:
     metadataMap:
