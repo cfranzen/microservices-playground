@@ -1,0 +1,54 @@
+- VOR DER SESSION:
+  1. Alle Datastores einmal leeren
+  2. Fraud und Fraud-Learning so anpassen, dass man das wieder implementieren muss
+
+- Überblick über die Application geben
+  1. Was macht jeder Dienst? Welche Usecases gibt es?
+  2. Welche Infrastruktur gibt es und wofür?
+
+- Infrastruktur hochfahren
+  1. In Graylog einen Input anlegen
+  2. Zeigen, dass alle Dienste laufen
+
+- Services hochfahren:
+  1. In Graylog nach auf Logs filter: "started" AND "seconds"
+  2. In Eureka die registrierten Services zeigen
+  3. In Prometheus JVM Size zeigen. Metrik: jvm_memory_used_bytes{area="heap",id="G1 Old Gen"}
+
+- Einen Test Request abfeuern.
+  1. Wiederholen, sodass sowohl im Kafka, als auch in der MongoDB was drin ist.
+  2. Alle Data Stores einmal zeigen: MongoDB, Postgres SQL, Redis, Kafka
+  3. Metriken in Prometheus zeigen (Custome Metrik für registrierte Customer): registered_customers_total{}
+  4. Traces in Zipkin zeigen
+
+- Notification Dienst runterfahren: docker stop notification
+  1. In Eureka und Prometheus zeigen, dass der Dienst weg ist
+  2. Request abfeuern und zeigen, dass diese in RabbitMQ geparked werden
+  3. Notification Dienst wieder starten und zeigen, dass Rabbit MQ geleert wird.
+  4. Logs von Notification zeigen
+
+- Weiteren Customer Service hochfahren
+  1. Dockerfile anpassen
+  2. In Eureka die zwei Services zeigen
+  3. Logs vom alten und neuen Customer Service zeigen (zwei Tabs nebeneinander)
+  4. Requests abfeuern
+
+- Services runterfahren und in IntelliJ neu starten (Fehler in Docker ignorieren)
+  1. erst DANACH das Dockerfile anpassen
+  2. Teilen des Terminals mit Str + Shift + W aufheben
+  3. Alle Services außer fraud-learning in IntelliJ starten
+  4. Test Request abfeuern
+
+- Erklären, dass man jetzt Fraud-Learning einmal implementiert
+
+- Änderungen an Fraud
+  1. Dependency auf kafka Lib eintragen
+  2. KafkaMessageProducer in FraudCheckService injecten und nutzen
+  3. KafkaConfig / KafkaMessageProducer importieren, indem scanBasePackage angepasst wird
+
+- Fraud Learning entwickeln
+  1. Neues Maven Module
+  2. Build Schritte kopieren (Spring Boot und Jib Maven Plugin)
+  3. Application anlegen
+  4. FraudCheckResultConsumer anlegen
+  5. application.yml's anlegen
