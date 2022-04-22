@@ -51,4 +51,10 @@
   2. Build Schritte kopieren (Spring Boot und Jib Maven Plugin)
   3. Application anlegen
   4. FraudCheckResultConsumer anlegen
+  5. FraudLearningService anlegen
   5. application.yml's anlegen
+
+- Was hab ich euch nicht gezeigt?
+  1. Wie schreibt man Tests?
+  2. Wie sieht es mit Security aus?
+  3. Wie betreibt man die Infrastruktur?
